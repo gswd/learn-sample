@@ -1,5 +1,6 @@
 package com.hm707.executor.framework.sample.shop_v02;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -14,6 +15,7 @@ public class Shop {
 	}
 
 	public String getPrice(String product) {
+		System.out.println(LocalDateTime.now() + "start get price --- ");
 		double price = calculatePrice(product);
 		Discount.Code code = Discount.Code.values()[new Random().nextInt(Discount.Code.values().length)];
 
