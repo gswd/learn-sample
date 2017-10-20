@@ -33,4 +33,14 @@ public class Quote {
 	public Discount.Code getDiscountCode() {
 		return discountCode;
 	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("Quote{");
+		sb.append("shopName='").append(shopName).append('\'');
+		sb.append(", price=").append(price);
+		sb.append(", discountCode=").append(discountCode);
+		sb.append('}');
+		return sb.toString();
+	}
 }

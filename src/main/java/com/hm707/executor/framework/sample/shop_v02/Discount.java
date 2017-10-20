@@ -13,15 +13,17 @@ public class Discount {
 	}
 
 	public static String applyDiscount(Quote quote) {
-		System.out.println(LocalDateTime.now() + "start discount --- ");
-		return quote.getShopName() + "price is " + Discount.apply(quote.getPrice(), quote.getDiscountCode());
+		System.out.println(LocalDateTime.now() + "\tstart discount --- [" + quote + "]");
+		String res = quote.getShopName() + " discount price is " + Discount.apply(quote.getPrice(), quote.getDiscountCode());
+		System.out.println(LocalDateTime.now() + "\t end discount --- [" + quote + "]");
+		return res;
 	}
 
 	private static String apply(double price, Code discountCode) {
 
 		Shop.delay();
 
-		return String.format("%.2f", price * (100 - discountCode.percentage) /100);
+		return String.format("%.2f", price * (100 - discountCode.percentage) / 100);
 	}
 
 }
