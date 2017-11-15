@@ -10,7 +10,7 @@ public class UsedFormatter {
 
 	/**
 	 * 与java.util.DateFormat相比，所有的DateTimeFormatter实例都是线程安全的，
-	 * 所以，能够以单例模式创建格式器实例。
+	 * 所以，能够以单例模式创建Formatter实例。
 	 * @param args
 	 */
 	public static void main(String[] args) {

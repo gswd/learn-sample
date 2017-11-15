@@ -3,6 +3,7 @@ package com.hm707.time.used;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -10,7 +11,8 @@ import java.time.ZonedDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Chronology;
 import java.time.chrono.JapaneseDate;
-import java.time.chrono.MinguoDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
@@ -27,9 +29,37 @@ public class UsedZoneDateTime {
 		//printAllZoneRules();
 
 		//testZoneId();
-		//testZonedDateTime();
+		testZonedDateTime();
 
-		otherCalendarSystem();
+		//otherCalendarSystem();
+
+		/*
+		Instant instant = Instant.ofEpochMilli(1508980067000L);
+
+		ZoneId koreaZoneId = ZoneId.of("Asia/Tokyo");
+		ZonedDateTime koreaDateTime = instant.atZone(koreaZoneId);
+
+		Date date = Date.from(koreaDateTime.toInstant());
+
+
+		System.out.println(date);*/
+
+		//将韩国时间转换为中国时间
+		/**
+		String tokyoDateTimeStr = "2017-10-01 10:00:00";
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime localDateTime = LocalDateTime.parse(tokyoDateTimeStr, fmt);
+
+		System.out.println(localDateTime);
+
+		ZonedDateTime tokyoDateTime = localDateTime.atZone(ZoneId.of("Asia/Tokyo"));
+
+		Instant instant = tokyoDateTime.toInstant();
+
+		 //LocalDateTime.ofInstant相当于将instant.atZone()指定了时区，然后转换为该时区应该显示的本地时间
+		System.out.println(LocalDateTime.ofInstant(instant, ZoneId.of("Asia/Shanghai")));
+		 **/
+
 	}
 
 	private static void printAllZoneRules() {
@@ -82,16 +112,17 @@ public class UsedZoneDateTime {
 		System.out.println("------- LocalDateTime => Instant -------");
 
 		//2017-10-24 15:20
-		LocalDateTime dateTime1 = LocalDateTime.of(2017, Month.OCTOBER, 24, 15, 20);
+		LocalDateTime dateTime1 = LocalDateTime.of(1970, Month.JANUARY, 1, 0, 0);
 		ZonedDateTime zdt4 = dateTime1.atZone(romeZone);
 		System.out.println(zdt4);
 		Instant instantFromDateTime = zdt4.toInstant();
 		System.out.println(instantFromDateTime);
 
-		//日本时间早于伦敦9小时
+		//日本时间快于伦敦9小时
 		System.out.println("--->" + dateTime1.toInstant(ZoneOffset.of("+09:00")));
+		System.out.println("--->" + dateTime1.toInstant(ZoneOffset.UTC));
 
-		Instant instant1 = Instant.now();
+		Instant instant1 = Instant.ofEpochSecond(0);
 		LocalDateTime timeFromInstant = LocalDateTime.ofInstant(instant1, romeZone);
 		System.out.println(timeFromInstant);
 

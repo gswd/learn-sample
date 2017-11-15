@@ -10,6 +10,7 @@ import java.time.Month;
 import java.time.Period;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 public class UsedSample {
 	public static void main(String[] args) {
@@ -22,6 +23,10 @@ public class UsedSample {
 
 	private static void testLocalDate() {
 		LocalDate date = LocalDate.of(2014, 3, 18);
+
+		LocalDate dateFromBase = LocalDate.ofEpochDay(365);
+		System.out.println("365th day from base date= "+dateFromBase);
+
 
 		int year = date.getYear();
 		System.out.println(String.format("year is [%d]", year));
@@ -118,6 +123,9 @@ public class UsedSample {
 
 		System.out.println(Instant.now().isSupported(ChronoField.DAY_OF_MONTH));
 
+		long epoch = Instant.now().getEpochSecond();
+		System.out.println(epoch);
+
 	}
 
 
@@ -161,6 +169,14 @@ public class UsedSample {
 		 * Duration内部封装了秒和毫秒数值，是使用秒和纳秒来衡量时间长短，所以不能表示LocalDate之间的时间长度
 		 */
 		//Duration.between(LocalDate.now(), LocalDate.now());
+
+		Duration duration4 = Duration.ofHours(1);
+		LocalTime time4 = LocalTime.now();
+
+		LocalTime afterOneHour = (LocalTime)duration4.addTo(time4);
+
+		System.out.println(afterOneHour);
+
 
 	}
 
